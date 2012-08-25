@@ -26,6 +26,7 @@
  */
 package org.spout.droplet.command;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.spout.api.chat.ChatArguments;
@@ -34,13 +35,18 @@ import org.spout.api.command.CommandContext;
 import org.spout.api.command.CommandSource;
 import org.spout.api.command.annotated.Command;
 import org.spout.api.command.annotated.CommandPermissions;
+import org.spout.api.entity.Controller;
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.Player;
 import org.spout.api.entity.controller.type.ControllerRegistry;
 import org.spout.api.entity.controller.type.ControllerType;
 import org.spout.api.exception.CommandException;
+import org.spout.api.inventory.ItemStack;
 
 import org.spout.droplet.DropletEntityPlugin;
+import org.spout.droplet.entity.controller.NPC;
+
+import org.spout.vanilla.material.VanillaMaterials;
 
 public class DropletCommands {
 	private final DropletEntityPlugin plugin;
@@ -57,8 +63,20 @@ public class DropletCommands {
 		}
 		Player spawner = (Player) source;
 		ControllerType spawning = ControllerRegistry.get(args.getString(0));
+		Collection<ControllerType> types = ControllerRegistry.getAll();
+		for (ControllerType type : types) {
+			plugin.getLogger().info(type.toString());
+		}
+		if (spawning == null) {
+			throw new CommandException("The type " + args.getString(0) + " was not found in the Controller Registry!");
+		}
 		if (!spawning.canCreateController()) {
-			 throw new CommandException("Cannot create the controller!");
+			throw new CommandException("Cannot create the controller!");
+		}
+		Controller controller = spawning.createController();
+		if (controller instanceof NPC) {
+			((NPC) controller).setName("Spouty");
+			((NPC) controller).setHeldItem(new ItemStack(VanillaMaterials.DIAMOND_SWORD, 1));
 		}
 		spawner.getWorld().createAndSpawnEntity(spawner.getPosition(), spawning.createController());
 		source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Spawned a " + spawning.getName() + " controller."));

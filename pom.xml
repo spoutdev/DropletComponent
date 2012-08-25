@@ -67,6 +67,12 @@
 			<version>${spoutVersion}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.spout</groupId>
+			<artifactId>vanilla</artifactId>
+			<version>1.3.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<!-- Build settings -->

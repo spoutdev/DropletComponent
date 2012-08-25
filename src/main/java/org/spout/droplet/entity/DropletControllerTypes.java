@@ -27,7 +27,8 @@
 package org.spout.droplet.entity;
 
 import org.spout.droplet.entity.controller.NPC;
+import org.spout.droplet.entity.protocol.NPCVanillaProtocol;
 
 public class DropletControllerTypes {
-	public static final DropletControllerType DROPLET_NPC = new DropletControllerType(NPC.class, "Droplet NPC");
+	public static final DropletControllerType NPC = new DropletControllerType(NPC.class, "NPC", new NPCVanillaProtocol());
 }

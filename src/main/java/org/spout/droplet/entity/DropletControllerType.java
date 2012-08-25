@@ -28,9 +28,22 @@ package org.spout.droplet.entity;
 
 import org.spout.api.entity.Controller;
 import org.spout.api.entity.controller.type.EmptyConstructorControllerType;
+import org.spout.api.protocol.EntityProtocol;
+
+import org.spout.droplet.entity.protocol.NPCVanillaProtocol;
+
+import org.spout.vanilla.VanillaPlugin;
 
 public class DropletControllerType extends EmptyConstructorControllerType {
 	public DropletControllerType(Class<? extends Controller> controllerClass, String name) {
+		this(controllerClass, name, null);
+	}
+
+	public DropletControllerType(Class<? extends Controller> controllerClass, String name, EntityProtocol protocol) {
 		super(controllerClass, name);
+		if (protocol != null) {
+			//Vanilla compatibility
+			setEntityProtocol(VanillaPlugin.VANILLA_PROTOCOL_ID, new NPCVanillaProtocol());
+		}
 	}
 }
