@@ -26,8 +26,13 @@
  */
 package org.spout.droplet.entity.controller;
 
+import org.spout.api.chat.ChatArguments;
+import org.spout.api.chat.style.ChatStyle;
 import org.spout.api.data.Data;
 import org.spout.api.entity.BasicController;
+import org.spout.api.entity.Entity;
+import org.spout.api.entity.Player;
+import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.geo.cuboid.Block;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.inventory.ItemStack;
@@ -76,6 +81,18 @@ public class NPC extends BasicController {
 		}
 		positionTicks++;
 		velocityTicks++;
+	}
+
+	@Override
+	public void onInteract(Entity entity, Action action) {
+		if (action == Action.RIGHT_CLICK) {
+			if (entity instanceof Player) {
+				Player player = (Player) entity;
+				player.sendMessage(new ChatArguments("<", ChatStyle.BLUE, name, ChatStyle.WHITE, "> You touched me you dirty person!"));
+			}
+		} else if (action == Action.LEFT_CLICK) {
+			//TODO Health
+		}
 	}
 
 	@Override

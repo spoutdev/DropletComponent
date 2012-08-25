@@ -27,6 +27,7 @@
 package org.spout.droplet.entity.component;
 
 import org.spout.api.entity.BasicComponent;
+import org.spout.api.tickable.TickPriority;
 
 import org.spout.droplet.entity.controller.NPC;
 

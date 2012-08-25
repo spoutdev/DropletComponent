@@ -40,6 +40,7 @@ import org.spout.api.util.Parameter;
 import org.spout.droplet.entity.controller.NPC;
 
 import org.spout.vanilla.protocol.msg.DestroyEntitiesMessage;
+import org.spout.vanilla.protocol.msg.entity.EntityEquipmentMessage;
 import org.spout.vanilla.protocol.msg.entity.EntityRelativePositionMessage;
 import org.spout.vanilla.protocol.msg.entity.EntityRelativePositionRotationMessage;
 import org.spout.vanilla.protocol.msg.entity.EntityRotationMessage;
@@ -76,7 +77,7 @@ public class NPCVanillaProtocol implements EntityProtocol {
 
 		List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
 		parameters.add(new Parameter<Byte>(Parameter.TYPE_BYTE, 0, (byte) 0));
-		return new Message[]{new EntitySpawnPlayerMessage(id, npc.getName(), x, y, z, r, p, item, parameters)};
+		return new Message[]{new EntitySpawnPlayerMessage(id, npc.getName(), x, y, z, r, p, item, parameters), new EntityEquipmentMessage(id, 0, heldItem)};
 	}
 
 	@Override
