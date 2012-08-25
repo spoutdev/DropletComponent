@@ -44,6 +44,7 @@ import org.spout.api.exception.CommandException;
 import org.spout.api.inventory.ItemStack;
 
 import org.spout.droplet.DropletEntityPlugin;
+import org.spout.droplet.entity.DropletControllerTypes;
 import org.spout.droplet.entity.controller.NPC;
 
 import org.spout.vanilla.material.VanillaMaterials;
@@ -63,10 +64,6 @@ public class DropletCommands {
 		}
 		Player spawner = (Player) source;
 		ControllerType spawning = ControllerRegistry.get(args.getString(0));
-		Collection<ControllerType> types = ControllerRegistry.getAll();
-		for (ControllerType type : types) {
-			plugin.getLogger().info(type.toString());
-		}
 		if (spawning == null) {
 			throw new CommandException("The type " + args.getString(0) + " was not found in the Controller Registry!");
 		}
@@ -78,7 +75,7 @@ public class DropletCommands {
 			((NPC) controller).setName("Spouty");
 			((NPC) controller).setHeldItem(new ItemStack(VanillaMaterials.DIAMOND_SWORD, 1));
 		}
-		spawner.getWorld().createAndSpawnEntity(spawner.getPosition(), spawning.createController());
+		spawner.getWorld().createAndSpawnEntity(spawner.getPosition(), controller);
 		source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Spawned a " + spawning.getName() + " controller."));
 	}
 

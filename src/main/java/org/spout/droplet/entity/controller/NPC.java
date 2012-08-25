@@ -40,7 +40,7 @@ public class NPC extends BasicController {
 	private final Transform transformLive = new Transform();
 	//Movement
 	private Vector3 maxSpeed = new Vector3(0.4, 0.4, 0.4);
-	private Vector3 velocity;
+	private Vector3 velocity = Vector3.ZERO;
 	private int positionTicks = 0, velocityTicks = 0;
 	//
 	private String name;
@@ -53,8 +53,12 @@ public class NPC extends BasicController {
 
 	@Override
 	public void onAttached() {
-		name = getDataMap().get(Data.TITLE);
-		heldItem = getDataMap().get(Data.HELD_ITEM);
+		if (name.isEmpty()) {
+			name = getDataMap().get(Data.TITLE);
+		}
+		if (heldItem == null) {
+			heldItem = getDataMap().get(Data.HELD_ITEM);
+		}
 	}
 
 	@Override

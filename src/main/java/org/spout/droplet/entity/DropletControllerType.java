@@ -43,7 +43,7 @@ public class DropletControllerType extends EmptyConstructorControllerType {
 		super(controllerClass, name);
 		if (protocol != null) {
 			//Vanilla compatibility
-			setEntityProtocol(VanillaPlugin.VANILLA_PROTOCOL_ID, new NPCVanillaProtocol());
+			setEntityProtocol(VanillaPlugin.VANILLA_PROTOCOL_ID, protocol);
 		}
 	}
 }

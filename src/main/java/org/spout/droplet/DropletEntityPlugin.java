@@ -26,13 +26,19 @@
  */
 package org.spout.droplet;
 
+import java.util.Collection;
+
 import org.spout.api.command.CommandRegistrationsFactory;
 import org.spout.api.command.annotated.AnnotatedCommandRegistrationFactory;
 import org.spout.api.command.annotated.SimpleAnnotatedCommandExecutorFactory;
 import org.spout.api.command.annotated.SimpleInjector;
+import org.spout.api.entity.controller.type.ControllerRegistry;
+import org.spout.api.entity.controller.type.ControllerType;
 import org.spout.api.plugin.CommonPlugin;
 
 import org.spout.droplet.command.DropletCommand;
+import org.spout.droplet.entity.DropletControllerType;
+import org.spout.droplet.entity.DropletControllerTypes;
 
 public class DropletEntityPlugin extends CommonPlugin {
 	@Override
@@ -40,7 +46,8 @@ public class DropletEntityPlugin extends CommonPlugin {
 		//Register commands
 		CommandRegistrationsFactory<Class<?>> commandRegFactory = new AnnotatedCommandRegistrationFactory(new SimpleInjector(this), new SimpleAnnotatedCommandExecutorFactory());
 		getEngine().getRootCommand().addSubCommands(this, DropletCommand.class, commandRegFactory);
-
+		//Fixes lazy jvm not loading the class
+		DropletControllerTypes.NPC.toString();
 		getLogger().info("b" + getDescription().getVersion() + " enabled");
 	}
 
