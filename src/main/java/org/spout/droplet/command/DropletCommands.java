@@ -26,7 +26,6 @@
  */
 package org.spout.droplet.command;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.spout.api.chat.ChatArguments;
@@ -44,7 +43,6 @@ import org.spout.api.exception.CommandException;
 import org.spout.api.inventory.ItemStack;
 
 import org.spout.droplet.DropletEntityPlugin;
-import org.spout.droplet.entity.DropletControllerTypes;
 import org.spout.droplet.entity.controller.NPC;
 
 import org.spout.vanilla.material.VanillaMaterials;

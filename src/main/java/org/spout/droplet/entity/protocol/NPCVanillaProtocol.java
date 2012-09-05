@@ -27,6 +27,7 @@
 package org.spout.droplet.entity.protocol;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.spout.api.entity.Controller;
@@ -39,6 +40,7 @@ import org.spout.api.util.Parameter;
 
 import org.spout.droplet.entity.controller.NPC;
 
+import org.spout.vanilla.protocol.entity.VanillaEntityProtocol;
 import org.spout.vanilla.protocol.msg.DestroyEntitiesMessage;
 import org.spout.vanilla.protocol.msg.entity.EntityEquipmentMessage;
 import org.spout.vanilla.protocol.msg.entity.EntityRelativePositionMessage;
@@ -54,12 +56,12 @@ import static org.spout.vanilla.protocol.ChannelBufferUtils.protocolifyRotation;
 /**
  * Provides compatibility with VanillaPlugin's protocol
  */
-public class NPCVanillaProtocol implements EntityProtocol {
+public class NPCVanillaProtocol extends VanillaEntityProtocol {
 	@Override
-	public Message[] getSpawnMessage(Entity entity) {
+	public List<Message> getSpawnMessages(Entity entity) {
 		Controller c = entity.getController();
 		if (c == null || !(c instanceof NPC)) {
-			return new Message[0];
+			return Collections.emptyList();
 		}
 		NPC npc = (NPC) c;
 		int id = entity.getId();
@@ -77,23 +79,18 @@ public class NPCVanillaProtocol implements EntityProtocol {
 
 		List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
 		parameters.add(new Parameter<Byte>(Parameter.TYPE_BYTE, 0, (byte) 0));
-		return new Message[]{new EntitySpawnPlayerMessage(id, npc.getName(), x, y, z, r, p, item, parameters), new EntityEquipmentMessage(id, 0, heldItem)};
+
+		ArrayList<Message> messages = new ArrayList<Message>();
+		messages.add(new EntitySpawnPlayerMessage(id, npc.getName(), x, y, z, r, p, item, parameters));
+		messages.add(new EntityEquipmentMessage(id, 0, heldItem));
+		return messages;
 	}
 
 	@Override
-	public Message[] getDestroyMessage(Entity entity) {
+	public List<Message> getUpdateMessages(Entity entity) {
 		Controller c = entity.getController();
 		if (c == null || !(c instanceof NPC)) {
-			return new Message[0];
-		}
-		return new Message[]{new DestroyEntitiesMessage(new int[]{entity.getId()})};
-	}
-
-	@Override
-	public Message[] getUpdateMessage(Entity entity) {
-		Controller c = entity.getController();
-		if (c == null || !(c instanceof NPC)) {
-			return new Message[0];
+			return Collections.emptyList();
 		}
 		NPC npc = (NPC) c;
 		Transform prevTransform = npc.getTransformLive();
@@ -138,6 +135,6 @@ public class NPCVanillaProtocol implements EntityProtocol {
 		if (npc.needsVelocityUpdate()) {
 			messages.add(new EntityVelocityMessage(entity.getId(), npc.getVelocity()));
 		}
-		return new Message[0];
+		return messages;
 	}
 }
