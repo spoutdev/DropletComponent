@@ -42,15 +42,15 @@ import org.spout.api.entity.controller.type.ControllerType;
 import org.spout.api.exception.CommandException;
 import org.spout.api.inventory.ItemStack;
 
-import org.spout.droplet.DropletEntityPlugin;
+import org.spout.droplet.DropletComponentPlugin;
 import org.spout.droplet.entity.controller.NPC;
 
 import org.spout.vanilla.material.VanillaMaterials;
 
 public class DropletCommands {
-	private final DropletEntityPlugin plugin;
+	private final DropletComponentPlugin plugin;
 
-	public DropletCommands(DropletEntityPlugin plugin) {
+	public DropletCommands(DropletComponentPlugin plugin) {
 		this.plugin = plugin;
 	}
 

@@ -40,7 +40,7 @@ import org.spout.droplet.command.DropletCommand;
 import org.spout.droplet.entity.DropletControllerType;
 import org.spout.droplet.entity.DropletControllerTypes;
 
-public class DropletEntityPlugin extends CommonPlugin {
+public class DropletComponentPlugin extends CommonPlugin {
 	@Override
 	public void onEnable() {
 		//Register commands

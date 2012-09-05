@@ -1,9 +1,9 @@
-name: DropletEntity
+name: DropletComponent
 version: ${buildNumber}
 description: Simple entity/controller demo plugin for Spout
 author: SpoutDev
 website: http://www.spout.org
 
 depends: [Vanilla]
-main: org.spout.droplet.DropletEntityPlugin
+main: org.spout.droplet.DropletComponentPlugin
 platform: BOTH

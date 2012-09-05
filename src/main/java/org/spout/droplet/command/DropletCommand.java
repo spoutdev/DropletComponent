@@ -32,12 +32,12 @@ import org.spout.api.command.annotated.Command;
 import org.spout.api.command.annotated.NestedCommand;
 import org.spout.api.exception.CommandException;
 
-import org.spout.droplet.DropletEntityPlugin;
+import org.spout.droplet.DropletComponentPlugin;
 
 public class DropletCommand {
-	private final DropletEntityPlugin plugin;
+	private final DropletComponentPlugin plugin;
 
-	public DropletCommand(DropletEntityPlugin plugin) {
+	public DropletCommand(DropletComponentPlugin plugin) {
 		this.plugin = plugin;
 	}
 
