@@ -1,10 +1,10 @@
 /*
- * This file is part of DropletEntity.
+ * This file is part of DropletComponent.
  *
  * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
- * DropletEntity is licensed under the SpoutDev License Version 1.
+ * DropletComponent is licensed under the SpoutDev License Version 1.
  *
- * DropletEntity is free software: you can redistribute it and/or modify
+ * DropletComponent is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -13,7 +13,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * DropletEntity is distributed in the hope that it will be useful,
+ * DropletComponent is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,11 +24,10 @@
  * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
  * including the MIT license.
  */
-package org.spout.droplet.entity;
+package org.spout.droplet.components.living;
 
-import org.spout.droplet.entity.controller.NPC;
-import org.spout.droplet.entity.protocol.NPCVanillaProtocol;
+import org.spout.vanilla.component.living.Human;
 
-public class DropletControllerTypes {
-	public static final DropletControllerType NPC = new DropletControllerType(NPC.class, "NPC", new NPCVanillaProtocol());
+public class DropletHuman extends Human {
+
 }
