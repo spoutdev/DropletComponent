@@ -1,57 +1,60 @@
-[![Spout][Project Logo]][Website]
-What is DropletEntity?
----------------------
-Simple entity/controller demo for the Spout platform.
+DropletComponent
+================
+Component "Droplet" plugin for the Spout platform to demonstrate the usage of building entities with features within components.
 
-Copyright (c) 2012, SpoutDev <<http://www.spout.org/>>
+Like the project? Feel free to [donate] to help continue development!
 
-DropletEntity is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
+## What is Spout?
+Spout is an open source multi-threaded Java voxel game framework and platform that opens the doors for infinite possibilities and expansion at the fingertips of gamers. Through the use of our platform, Spout and its API, developers can create "game" plugins, which use our client and server platform as a base. Players will be able to swap between games on-the-fly as they switch to a server running a different game plugin, or a set of game plugins.
 
-Who is SpoutDev?
-----------------
-SpoutDev is the team behind the Spout and Spoutcraft projects, I See You, and Pipe.  
-[![Afforess](https://secure.gravatar.com/avatar/ea0be49e1e4deac42ed9204ffd95b56c?d=mm&r=pg&s=48)](http://forums.spout.org/members/afforess.2/) [![alta189](https://secure.gravatar.com/avatar/7a087430b2bf9456b8879c5469aadb95?d=mm&r=pg&s=48)](http://forums.spout.org/members/alta189.3/) [![Wulfspider](https://secure.gravatar.com/avatar/6f2a0dcb60cd1ebee57875f9326bc98c?d=mm&r=pg&s=48)](http://forums.spout.org/members/wulfspider.1/) [![raphfrk](https://secure.gravatar.com/avatar/68186a30d5a714f6012a9c48d2b10630?d=mm&r=pg&s=48)](http://forums.spout.org/members/raphfrk.601/) [![narrowtux](https://secure.gravatar.com/avatar/f110a5b8feacea25275521f4efd0d7f2?d=mm&r=pg&s=48)](http://forums.spout.org/members/narrowtux.5/) [![Top_Cat](https://secure.gravatar.com/avatar/defeffc70d775f6df95b68f0ece46c9e?d=mm&r=pg&s=48)](http://forums.spout.org/members/top_cat.4/) [![Olloth](https://secure.gravatar.com/avatar/fa8429add105b86cf3b61dbe15638812?d=mm&r=pg&s=48)](http://forums.spout.org/members/olloth.6/) [![Rycochet](https://secure.gravatar.com/avatar/b06c12e72953e0edd3054a8645d76791?d=mm&r=pg&s=48)](http://forums.spout.org/members/rycochet.10/) [![RoyAwesome](https://secure.gravatar.com/avatar/6d258213c33a16465021daa8df299a0d?d=mm&r=pg&s=48)](http://forums.spout.org/members/royawesome.8/) [![zml2008](https://secure.gravatar.com/avatar/2320ab48d0715a4e9c73b7ec13fd6f3a?d=mm&r=pg&s=48)](http://forums.spout.org/members/zml2008.14/) [![Zidane](https://secure.gravatar.com/avatar/99532c7f117c8dac751422376116fb38?d=mm&r=pg&s=48)](http://forums.spout.org/members/zidane.7/) 
+[![Spout][Logo]][Homepage]  
+[Homepage] | [Forums] | [Twitter] | [Facebook]
 
-Visit our [website][Website] or get support on our [forums][Forums].  
-Track and submit issues and bugs on our [issue tracker][Issues].
+## The License
+DropletComponent and all "Droplet" plugins for the Spout platform are licensed under the [MIT License][License].
 
-[![Follow us on Twitter][Twitter Logo]][Twitter][![Like us on Facebook][Facebook Logo]][Facebook][![Donate to the Spout project][Donate Logo]][Donate]
+Copyright (c) 2012, Spout LLC <<http://www.spout.org/>>  
 
-Source
-------
-The latest and greatest source can be found on [GitHub].  
-Download the latest builds from [Jenkins].  
+## Getting the Source
+The latest and greatest source can be found here on [GitHub][Source].  
+Download the latest builds from our [build server][Builds]. [![Build Status](http://build.spout.org/job/DropletComponent/badge/icon)][Builds]
 
-Compiling
----------
-DropletEntity uses Maven to handle its dependencies.
+## Compiling the Source
+DropletComponent uses Maven to handle its dependencies.
 
 * Install [Maven 2 or 3](http://maven.apache.org/download.html)  
 * Checkout this repo and run: `mvn clean package`
 
-Coding and Pull Request Formatting
-----------------------------------
+## Installing the Plugin
+Simply place the latest [compiled jar][Builds] in your Spout server's plugins folder.  
+Change the `config.yml` located under `plugins/DropletComponent` as needed.
+
+## Contributing to the Project
+Track and submit issues and bugs on our [issue tracker][Issues].  
+[Share the love!][Donate] Donations help make development possible!
+
+## Coding and Pull Request Conventions
 * Generally follow the Oracle coding standards.
-* Use tabs, no spaces.
-* No trailing whitespaces.
-* No 80 column limit or midstatement newlines.
-* Pull requests must compile and work.
-* Pull requests must be formatted properly.
-* Number of commits in a pull request should be kept to a minimum.
+* No spaces, only tabs for indentation.
+* No trailing whitespaces on new lines.
+* 200 column limit for readability.
+* Pull requests must compile, work, and be formatted properly.
+* Sign-off on ALL your commits - this indicates you agree to the terms of our license.
 * No merges should be included in pull requests unless the pull request's purpose is a merge.
+* Number of commits in a pull request should be kept to *one commit* and all additional commits must be *squashed*.
+* You may have more than one commit in a pull request if the commits are separate changes, otherwise squash them.
+* For clarification, see the full pull request guidelines [here](http://spout.in/prguide).
 
 **Please follow the above conventions if you want your pull request(s) accepted.**
 
-[Project Logo]: http://cdn.spout.org/img/logo/spout_327x150.png
-[License]: http://www.spout.org/SpoutDevLicenseV1.txt
-[Website]: http://www.spout.org
+[Logo]: http://cdn.spout.org/img/logo/spout_new.png
+[Homepage]: http://www.spout.org
 [Forums]: http://forums.spout.org
-[GitHub]: https://github.com/SpoutDev/DropletAlert
-[Jenkins]: http://build.spout.org/job/DropletAlert
-[Issues]: http://issues.spout.org
+[License]: http://cdn.spout.org/license/mit.txt
+[Source]: https://github.com/Droplets/DropletComponent
+[Builds]: http://build.spout.org/job/DropletComponent
+[Issues]: http://issues.spout.org/browse/droplet
+[Wiki]: http://wiki.spout.org/display/droplet
 [Twitter]: http://spout.in/twitter
-[Twitter Logo]: http://cdn.spout.org/img/button/twitter_follow_us.png
 [Facebook]: http://spout.in/facebook
-[Facebook Logo]: http://cdn.spout.org/img/button/facebook_like_us.png
-[Donate]: https://www.paypal.com/cgi-bin/webscr?hosted_button_id=QNJH72R72TZ64&item_name=DropletEntity+donation+%28from+github.com%29&cmd=_s-xclick
-[Donate Logo]: http://cdn.spout.org/img/button/donate_paypal_96x96.png
+[Donate]: http://spout.in/donate
