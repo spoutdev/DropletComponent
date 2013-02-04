@@ -1,32 +1,27 @@
 /*
  * This file is part of DropletComponent.
  *
- * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
- * DropletComponent is licensed under the SpoutDev License Version 1.
+ * Copyright (c) 2012, Spout LLC <http://www.spout.org/>
  *
- * DropletComponent is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
  *
- * In addition, 180 days after any changes are published, you can use the
- * software, incorporating those changes, under the terms of the MIT license,
- * as described in the SpoutDev License Version 1.
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
- * DropletComponent is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the SpoutDev License Version 1 along with this program.
- * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
- * including the MIT license.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 package org.spout.droplet.component.command;
-
-import java.util.List;
 
 import org.spout.api.chat.ChatArguments;
 import org.spout.api.chat.style.ChatStyle;
@@ -38,12 +33,13 @@ import org.spout.api.entity.Entity;
 import org.spout.api.entity.Player;
 import org.spout.api.exception.CommandException;
 
-import org.spout.vanilla.component.substance.MovingBlock;
-import org.spout.vanilla.data.GameMode;
-import org.spout.vanilla.material.VanillaMaterials;
-
 import org.spout.droplet.component.DropletComponent;
-import org.spout.droplet.component.components.living.DropletHuman;
+
+import org.spout.vanilla.api.data.GameMode;
+
+import org.spout.vanilla.plugin.component.living.neutral.Human;
+import org.spout.vanilla.plugin.component.substance.object.FallingBlock;
+import org.spout.vanilla.plugin.material.VanillaMaterials;
 
 public class DropletCommands {
 	private final DropletComponent plugin;
@@ -52,26 +48,31 @@ public class DropletCommands {
 		this.plugin = plugin;
 	}
 
-	@Command(aliases = {"spawn"}, usage = "<component>", desc = "Spawn a controller!", min = 1, max = 1)
+	@Command(aliases = {"spawn"}, usage = "<component>", desc = "Spawn an Entity!", min = 1, max = 1)
 	@CommandPermissions("droplet.command.spawn")
 	public void spawn(CommandContext args, CommandSource source) throws CommandException {
 		if (!(source instanceof Player)) {
 			throw new CommandException("Must be in-game to spawn an entity!");
 		}
-		Player spawner = (Player) source;
-		String component = args.getString(0);
-		Entity entity = spawner.getWorld().createEntity(spawner.getTransform().getPosition(), null);
-		String name = "";
+		final Player spawner = (Player) source;
+		final String component = args.getString(0);
+		Entity entity;
+		String name;
 		if (component.equalsIgnoreCase("npc")) {
-			DropletHuman human = entity.add(DropletHuman.class);
+			entity = spawner.getWorld().createEntity(spawner.getScene().getPosition(), Human.class);
+			final Human human = entity.get(Human.class);
 			name = human.getClass().getName();
 			human.setGamemode(GameMode.SURVIVAL);
 		} else if (component.equalsIgnoreCase("moving")) {
-			MovingBlock block = entity.add(MovingBlock.class);
-			name = block.getClass().getName();
-			block.setMaterial(VanillaMaterials.OBSIDIAN);
+			entity = spawner.getWorld().createEntity(spawner.getScene().getPosition(), FallingBlock.class);
+			final FallingBlock falling = spawner.get(FallingBlock.class);
+			falling.setMaterial(VanillaMaterials.END_STONE);
+			name = VanillaMaterials.END_STONE.getName();
+		} else {
+			source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Component " + component + " can't be spawned."));
+			return;
 		}
-		spawner.getTransform().getPosition().getWorld().spawnEntity(entity);
+		spawner.getScene().getPosition().getWorld().spawnEntity(entity);
 		source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Spawned an entity with a " + name + " component."));
 	}
 }
