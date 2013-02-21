@@ -34,12 +34,10 @@ import org.spout.api.entity.Player;
 import org.spout.api.exception.CommandException;
 
 import org.spout.droplet.component.DropletComponent;
-
-import org.spout.vanilla.api.data.GameMode;
-
-import org.spout.vanilla.plugin.component.living.neutral.Human;
-import org.spout.vanilla.plugin.component.substance.object.FallingBlock;
-import org.spout.vanilla.plugin.material.VanillaMaterials;
+import org.spout.vanilla.component.entity.living.neutral.Human;
+import org.spout.vanilla.component.entity.substance.object.FallingBlock;
+import org.spout.vanilla.data.GameMode;
+import org.spout.vanilla.material.VanillaMaterials;
 
 public class DropletCommands {
 	private final DropletComponent plugin;
