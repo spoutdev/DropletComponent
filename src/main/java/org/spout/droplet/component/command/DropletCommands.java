@@ -23,19 +23,17 @@
  */
 package org.spout.droplet.component.command;
 
-import org.spout.api.chat.ChatArguments;
-import org.spout.api.chat.style.ChatStyle;
-import org.spout.api.command.CommandContext;
+import org.spout.api.command.CommandArguments;
 import org.spout.api.command.CommandSource;
 import org.spout.api.command.annotated.Command;
-import org.spout.api.command.annotated.CommandPermissions;
+import org.spout.api.command.annotated.Permissible;
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.Player;
 import org.spout.api.exception.CommandException;
 
 import org.spout.droplet.component.DropletComponent;
-import org.spout.vanilla.component.entity.living.neutral.Human;
-import org.spout.vanilla.component.entity.substance.object.FallingBlock;
+import org.spout.vanilla.component.entity.living.Human;
+import org.spout.vanilla.component.entity.substance.FallingBlock;
 import org.spout.vanilla.data.GameMode;
 import org.spout.vanilla.material.VanillaMaterials;
 
@@ -46,9 +44,10 @@ public class DropletCommands {
 		this.plugin = plugin;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Command(aliases = {"spawn"}, usage = "<component>", desc = "Spawn an Entity!", min = 1, max = 1)
-	@CommandPermissions("droplet.command.spawn")
-	public void spawn(CommandContext args, CommandSource source) throws CommandException {
+	@Permissible("droplet.command.spawn")
+	public void spawn(CommandSource source, CommandArguments args) throws CommandException {
 		if (!(source instanceof Player)) {
 			throw new CommandException("Must be in-game to spawn an entity!");
 		}
@@ -67,10 +66,10 @@ public class DropletCommands {
 			falling.setMaterial(VanillaMaterials.END_STONE);
 			name = VanillaMaterials.END_STONE.getName();
 		} else {
-			source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Component " + component + " can't be spawned."));
+			source.sendMessage("[" + '\u00A7' +'1' + plugin.getName()+ '\u00A7' +'f' + "] Component " + component + " can't be spawned.");
 			return;
 		}
 		spawner.getScene().getPosition().getWorld().spawnEntity(entity);
-		source.sendMessage(new ChatArguments("[", ChatStyle.BLUE, plugin.getName(), ChatStyle.WHITE, "] Spawned an entity with a " + name + " component."));
+		source.sendMessage("[" + '\u00A7' +'1' + plugin.getName()+ '\u00A7' +'f' + "] Spawned an entity with a " + name + " component.");
 	}
 }

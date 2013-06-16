@@ -23,20 +23,17 @@
  */
 package org.spout.droplet.component;
 
-import org.spout.api.command.CommandRegistrationsFactory;
-import org.spout.api.command.annotated.AnnotatedCommandRegistrationFactory;
-import org.spout.api.command.annotated.SimpleAnnotatedCommandExecutorFactory;
-import org.spout.api.command.annotated.SimpleInjector;
-import org.spout.api.plugin.CommonPlugin;
+import org.spout.api.command.annotated.AnnotatedCommandExecutorFactory;
+import org.spout.api.plugin.Plugin;
 
-import org.spout.droplet.component.command.DropletCommand;
+import org.spout.droplet.component.command.DropletCommands;
 
-public class DropletComponent extends CommonPlugin {
+public class DropletComponent extends Plugin {
+
 	@Override
 	public void onEnable() {
 		// Register commands
-		CommandRegistrationsFactory<Class<?>> commandRegFactory = new AnnotatedCommandRegistrationFactory(new SimpleInjector(this), new SimpleAnnotatedCommandExecutorFactory());
-		getEngine().getRootCommand().addSubCommands(this, DropletCommand.class, commandRegFactory);
+		AnnotatedCommandExecutorFactory.create(new DropletCommands(this), getEngine().getCommandManager().getCommand("droplet"));
 		getLogger().info("enabled.");
 	}
 
